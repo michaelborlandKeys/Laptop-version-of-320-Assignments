@@ -2,15 +2,15 @@
  * Created by micha on 1/19/2017.
  */
 
-console.log("Hi User");
+
 function Part1 () {
 
     console.log("Hello");
 
 }
-var part_1 = $("#button1");
+    var part_1 = $("#button1");
 
-part_1.on("click",Part1);
+    part_1.on("click",Part1);
 
 function Part2(sum_Of_Form)
 {
@@ -26,24 +26,24 @@ function Part2(sum_Of_Form)
 
 
 }
-var part_2 = $("#button2");
+    var part_2 = $("#button2");
 
-part_2.on("click",Part2);
+    part_2.on("click",Part2);
 
 
 function Part3 (event)
 {
-if($("#paragraphToHide").is(":visible")) {
-    $("#paragraphToHide").hide();
-} else
-{
-    $("#paragraphToHide").show();
-}
+    if($("#paragraphToHide").is(":visible")) {
+        $("#paragraphToHide").hide();
+    } else
+    {
+        $("#paragraphToHide").show();
+    }
 
 }
 
-var part_3 = $("#button3");
-part_3.on("click", Part3);
+    var part_3 = $("#button3");
+    part_3.on("click", Part3);
 
 function Part4(event) {
     // Get the field
@@ -60,8 +60,8 @@ function Part4(event) {
     }}
 
 // Attach an action to a button click
-var part_4 = $('#button4');
-part_4.on("click", Part4);
+    var part_4 = $('#button4');
+    part_4.on("click", Part4);
 
 
 
@@ -88,5 +88,5 @@ function Part5(event) {
 }
 
 // Attach an action to a button click
-var part_5 = $('#button5');
-part_5.on("click", Part5);
+    var part_5 = $('#button5');
+    part_5.on("click", Part5);
