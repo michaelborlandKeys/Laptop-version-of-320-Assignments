@@ -25,6 +25,9 @@ public class NameListGet extends javax.servlet.http.HttpServlet {
         // Replace the line below with your database code that will
         // write out your JSON file.
         List <Person> peopleList = PersonDAO.getPeople();
+        boolean printPerson_Start= true;
+        out.println("[");
+        
 
         Gson gson = new Gson();
 

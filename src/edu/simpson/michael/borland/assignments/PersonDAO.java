@@ -33,7 +33,7 @@ public class PersonDAO {
             conn = DB_Helper.getConnection();
 
             // This is a string that is our SQL query.
-            String sql = "select id, first, last from person";
+            String sql = "select id, first, last,email,phone,birthday from person";
 
             // If you had parameters, it would look something like
             // String sql = "select id, first, last, phone from person where id = ?";
@@ -58,9 +58,12 @@ public class PersonDAO {
                 person.setId(rs.getInt("id"));
                 person.setFirst(rs.getString("first"));
                 person.setLast(rs.getString("last"));
+                person.setEmail(rs.getString("email"));
+                person.setBirthday(rs.getString("birthday"));
 
-                // Add this person to the list so we can return it.
                 list.add(person);
+
+                // Add this person to the list so we can return it. list.add(person);
             }
         } catch (SQLException se) {
             log.log(Level.SEVERE, "SQL Error", se );
@@ -75,6 +78,5 @@ public class PersonDAO {
         // Done! Return the results
         return list;
     }
-
 
 }
