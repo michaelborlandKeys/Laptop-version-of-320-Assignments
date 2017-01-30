@@ -34,9 +34,6 @@ public class NameListGet extends javax.servlet.http.HttpServlet {
         for (Person print_Name_List_Info : peopleList)
          {
 
-
-
-
              out.print("{ \"id\""+":"+ (print_Name_List_Info.getId())+",");
              out.print("\"first\""+":"+"\""+(print_Name_List_Info.getFirst())+"\""+",");
              out.print("\"last\""+":"+"\""+(print_Name_List_Info.getLast())+"\""+",");
@@ -48,20 +45,8 @@ public class NameListGet extends javax.servlet.http.HttpServlet {
          if (i++ < peopleList.size()) {
              out.println(",");
          }
-
-
-
         }
         out.println("]\n");
-
-
-        Gson gson = new Gson();
-
-        // Go ahead and turn peopleList into a JSON string
-        String json = gson.toJson(peopleList);
-
-        // Write out that string
-        out.println(json);
 
         }
 
