@@ -25,9 +25,35 @@ public class NameListGet extends javax.servlet.http.HttpServlet {
         // Replace the line below with your database code that will
         // write out your JSON file.
         List <Person> peopleList = PersonDAO.getPeople();
-        boolean printPerson_Start= true;
+       Person person = new Person();
+
         out.println("[");
-        
+
+        int i = 1;
+
+        for (Person print_Name_List_Info : peopleList)
+         {
+
+
+
+
+             out.print("{ \"id\""+":"+ (print_Name_List_Info.getId())+",");
+             out.print("\"first\""+":"+"\""+(print_Name_List_Info.getFirst())+"\""+",");
+             out.print("\"last\""+":"+"\""+(print_Name_List_Info.getLast())+"\""+",");
+             out.print("\"phone\""+":"+"\""+(print_Name_List_Info.getPhone())+"\""+",");
+             out.print("\"email\""+":"+"\""+(print_Name_List_Info.getEmail())+"\""+",");
+             out.print("\"birthday\""+":"+"\""+(print_Name_List_Info.getBirthday())+"\"");
+             out.println("}");
+
+         if (i++ < peopleList.size()) {
+             out.println(",");
+         }
+
+
+
+        }
+        out.println("]\n");
+
 
         Gson gson = new Gson();
 
@@ -36,9 +62,13 @@ public class NameListGet extends javax.servlet.http.HttpServlet {
 
         // Write out that string
         out.println(json);
-        out.print("{ \"Field\":\"Value\"}");
+
+        }
+
+
+
 
 
 
     }
-}
+
