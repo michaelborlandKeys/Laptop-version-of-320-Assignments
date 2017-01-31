@@ -48,6 +48,7 @@ public class NameListGet extends javax.servlet.http.HttpServlet {
         }
         out.println("]\n");
 
+
         }
 
 
