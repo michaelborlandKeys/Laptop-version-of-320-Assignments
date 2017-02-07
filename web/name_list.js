@@ -39,6 +39,25 @@ function displayTableRecords() {
 
 }
 
+function showDialogAdd() {
+
+    // Print that we got here
+    console.log("Opening add item dialog");
+
+    // Clear out the values in the form.
+    // Otherwise we'll keep values from when we last
+    // opened or hit edit.
+    // I'm getting it started, you can finish.
+    $('#id').val("");
+    $('#firstName').val("");
+
+    // Show the hidden dialog
+    $('#myModal').modal('show');
+}
+
+var addItemButton = $('#addItem');
+addItemButton.on("click", showDialogAdd);
+
 
 // Call your code.
 displayTableRecords();
