@@ -19,9 +19,10 @@ function displayTableRecords() {
 
         $("#displayUserInfo")[0].rows[1].remove();
         for (var i = 0; i < display_Json_Data.length; i++) {
-            var fieldDataGet = $('#displayUserInfo').val();
+            var mysting = display_Json_Data[i].phone.substring(0,3) + "-"
+                +display_Json_Data[i].phone.substring(0,3)+"-"+display_Json_Data[i].phone.substring(0,4);
             var fieldDataDisplay = "<tr><td>"+display_Json_Data[i].id+"</td><td>"+display_Json_Data[i].first+"</td><td>"+display_Json_Data[i].last+"</td>" +
-                                    "<td>"+display_Json_Data[i].phone+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td></tr>";
+                                    "<td>"+mysting+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td></tr>";
             $("#displayUserInfo tbody").append(fieldDataDisplay);
             console.log("testing if the log prints to the console on server")
 
@@ -61,5 +62,5 @@ addItemButton.on("click", showDialogAdd);
 
 // Call your code.
 displayTableRecords();
-
+11
 
