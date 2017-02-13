@@ -20,7 +20,7 @@ function displayTableRecords() {
         $("#displayUserInfo")[0].rows[1].remove();
         for (var i = 0; i < display_Json_Data.length; i++) {
             var mysting = display_Json_Data[i].phone.substring(0,3) + "-"
-                +display_Json_Data[i].phone.substring(0,3)+"-"+display_Json_Data[i].phone.substring(0,4);
+                +display_Json_Data[i].phone.substring(3,6)+"-"+display_Json_Data[i].phone.substring(6,10);
             var fieldDataDisplay = "<tr><td>"+display_Json_Data[i].id+"</td><td>"+display_Json_Data[i].first+"</td><td>"+display_Json_Data[i].last+"</td>" +
                                     "<td>"+mysting+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td></tr>";
             $("#displayUserInfo tbody").append(fieldDataDisplay);
@@ -51,6 +51,35 @@ function showDialogAdd() {
     // I'm getting it started, you can finish.
     $('#id').val("");
     $('#firstName').val("");
+    $('#lastName').val("");
+    $('#email').val("");
+    $('#phone').val("");
+    $('#birthday').val("");
+
+// All of the jQuery to remove the style when the add button is clicked.
+    $('#firstNameDiv').removeClass("has-error");
+    $('#firstNameGlyph').removeClass("glyphicon-remove");
+    $('#firstNameGlyph').removeClass("glyphicon-ok");
+    $('#firstNameDiv').removeClass("has-success");
+    $('#lastNameDiv').removeClass("has-error");
+    $('#lastNameGlyph').removeClass("glyphicon-remove");
+    $('#lastNameGlyph').removeClass("glyphicon-ok");
+    $('#lastNameDiv').removeClass("has-success");
+    $('#emailDiv').removeClass("has-error");
+    $('#emailGlyph').removeClass("glyphicon-remove");
+    $('#emailGlyph').removeClass("glyphicon-ok");
+    $('#emailDiv').removeClass("has-success");
+    $('#phoneDiv').removeClass("has-error");
+    $('#phoneGlyph').removeClass("glyphicon-remove");
+    $('#phoneGlyph').removeClass("glyphicon-ok");
+    $('#phoneDiv').removeClass("has-success");
+    $('#birthdayDiv').removeClass("has-error");
+    $('#birthdayGlyph').removeClass("glyphicon-remove");
+    $('#birthdayGlyph').removeClass("glyphicon-ok");
+    $('#birthdayDiv').removeClass("has-success");
+
+
+
 
     // Show the hidden dialog
     $('#myModal').modal('show');
@@ -62,5 +91,5 @@ addItemButton.on("click", showDialogAdd);
 
 // Call your code.
 displayTableRecords();
-11
+
 

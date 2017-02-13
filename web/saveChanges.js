@@ -11,7 +11,7 @@
     var valid_birthday= $('#birthday').val();
 
     // regexpressions
-    var regExpression_id = /^[0-9]{1,25}$/;
+   // for future validation var regExpression_id = /^[0-9]{1,25}$/;
     var regExpression_F_Name = /^[A-Za-z  àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/;
     var regExpression_L_Name = /^[A-Za-z  àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/;
     var regExpression_Email = /^([0-9a-zA-Z]+[-._+&amp;])+[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/;
@@ -112,20 +112,6 @@
 
 
 }
-function closeBtn() {
-     // http://stackoverflow.com/questions/19541936/reset-remove-classes-from-a-form-after-jquery-validator-use-inside-modal
-    // that was the site i fpund out how to reset the specfic classes,
-    // i tried just removinvg classes
-    // but i did work, i found  this solution. i was trying to
-    // remove has success and error classes from my-form id, and that failed.
-    // i researched the reset method implemtation on w3schools to get it to reset.
-    $('.form-group').removeClass('has-error  has-feedback');
-    document.getElementById("my-form").reset();
-
-
-}
- var  closingBtn = $('#closing');
-closingBtn.on("click",closeBtn);
 
  var savechanges = $('#saveChanges');
 savechanges.on("click",savechangesBtn);
