@@ -9,6 +9,7 @@
     var valid_email = $('#email').val();
     var valid_phone = $('#phone').val();
     var valid_birthday= $('#birthday').val();
+    var valid_form = true;
 
     // regexpressions
    // for future validation var regExpression_id = /^[0-9]{1,25}$/;
@@ -37,6 +38,7 @@
             $('#firstNameGlyph').addClass("glyphicon-remove");
             $('#firstNameGlyph').removeClass("glyphicon-ok");
             $('#firstNameDiv').removeClass("has-success");
+            valid_form = false;
             console.log("Invalid Input");
 
 
@@ -55,6 +57,7 @@
             $('#lastNameGlyph').addClass("glyphicon-remove");
             $('#lastNameGlyph').removeClass("glyphicon-ok");
             $('#lastNameDiv').removeClass("has-success");
+            valid_form = false;
             console.log("invaild input");
 
         }
@@ -72,6 +75,7 @@
             $('#emailGlyph').addClass("glyphicon-remove");
             $('#emailGlyph').removeClass("glyphicon-ok");
             $('#emailDiv').removeClass("has-success");
+            valid_form = false;
             console.log("invaild input");
 
         }
@@ -89,6 +93,8 @@
             $('#phoneGlyph').addClass("glyphicon-remove");
             $('#phoneGlyph').removeClass("glyphicon-ok");
             $('#phoneDiv').removeClass("has-success");
+            valid_form = false;
+
             console.log("invaild input");
 
         }
@@ -98,6 +104,7 @@
             $('#birthdayGlyph').removeClass("glyphicon-remove");
             $('#birthdayGlyph').addClass("glyphicon-ok");
             $('#birthdayDiv').addClass("has-success");
+
             console.log("vaild input");
         }
         else
@@ -106,8 +113,17 @@
             $('#birthdayGlyph').addClass("glyphicon-remove");
             $('#birthdayGlyph').removeClass("glyphicon-ok");
             $('#birthdayDiv').removeClass("has-success");
+            valid_form = false;
             console.log("invaild input");
 
+        }
+        if(valid_form == true){
+            // call new servlet here
+
+        }
+        else
+        {
+            // valid form == false;
         }
 
 
