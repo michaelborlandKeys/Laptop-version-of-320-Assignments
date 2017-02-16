@@ -16,7 +16,7 @@
     var regExpression_F_Name = /^[A-Za-z  àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/;
     var regExpression_L_Name = /^[A-Za-z  àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/;
     var regExpression_Email = /^([0-9a-zA-Z]+[-._+&amp;])+[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/;
-    var regExpression_Phone = /^\d{3}\-\d{3}\-\d{4}$/ ;
+    var regExpression_Phone = /^\d{3}[-]*\d{3}[-]*\d{4}$/ ;
     var regExpression_Birthday = /^\d{4}\-\d{2}\-\d{2}$/;
 
     // Create the regular expression
@@ -118,11 +118,31 @@
 
         }
         if(valid_form == true){
-            // call new servlet here
-
+            // call new  servlet here
+            <!-- AJAX Post -->
+                console.log("is form vaild")
+                var url = "api/name_list_edit";
+                var dataToServer = { first : valid_First_name,last : valid_Last_name
+                , email: valid_email , phone: valid_phone,
+                    birthday : valid_birthday
+                };
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(dataToServer),
+                success: function(dataFromServer) {
+                    console.log(dataFromServer);
+                },
+                contentType: "application/json",
+                dataType: 'text' // Could be JSON or whatever too
+            });
         }
+
         else
         {
+            valid_form == false;
+            showDialogAdd();
+
             // valid form == false;
         }
 
@@ -131,4 +151,5 @@
 
  var savechanges = $('#saveChanges');
 savechanges.on("click",savechangesBtn);
+
 
