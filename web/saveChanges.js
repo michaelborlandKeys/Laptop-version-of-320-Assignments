@@ -130,8 +130,11 @@
                 type: 'POST',
                 url: url,
                 data: JSON.stringify(dataToServer),
-                success: function(dataFromServer) {
-                    console.log(dataFromServer);
+                success: function(dataFromServer)  {
+                    $('#myModal').modal('hide');
+                    $("#displayUserInfo table").empty();
+                    displayTableRecords();
+
                 },
                 contentType: "application/json",
                 dataType: 'text' // Could be JSON or whatever too
