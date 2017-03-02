@@ -13,19 +13,40 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by micha on 2/14/2017.
  */
 @WebServlet(name = "NameListEdit")
 public class NameListEdit extends HttpServlet {
+    private Pattern validate_First_Name;
+    private Pattern validate_Last_Name;
+    private Pattern validate_Email;
+    private Pattern validate_Phone;
+    private Pattern validate_Birthday;
     final Logger log = Logger.getLogger(NameListEdit.class.getName());
+    private boolean valid_form = false;
 
+
+
+    public NameListEdit ()
+    {
+        validate_First_Name = Pattern.compile("^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/");
+        validate_Last_Name = Pattern.compile("^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/");
+        validate_Email = Pattern.compile("^([0-9a-zA-Z]+[-._+&amp;])+[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/");
+        validate_Phone = Pattern.compile("^\\d{3}[-]*\\d{3}[-]*\\d{4}$/");
+        validate_Birthday = Pattern.compile("^\\d{4}\\-\\d{2}\\-\\d{2}$/");
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
-      //  List <Person> peopleList = PersonDAO.getPeople();
+        out.println("Post");
+
+        // Grab the data we got via a parameter
+
 
 
         java.io.BufferedReader in = request.getReader();
@@ -49,6 +70,46 @@ log.log(Level.SEVERE, "Didn't get to printing out any data.");
         out.println(" Email: "+fromJson.getEmail());
         out.println(" Phone: "+fromJson.getPhone());
         out.println(" Birthday: "+fromJson.getBirthday());
+
+
+
+        // Now create matcher object.
+        Matcher matching_data_first = validate_First_Name.matcher(fromJson.getFirst());
+        if (matching_data_first.find( )) {
+            out.println("Valid First Name");
+        } else {
+            out.println("Invalid First Name");
+        }
+        Matcher matching_data_last = validate_Last_Name.matcher(fromJson.getLast());
+        if (matching_data_last.find( )) {
+            out.println("Valid Last Name");
+        } else {
+            out.println("Invalid Last Name");
+        }
+
+        Matcher matching_data_email = validate_Email.matcher(fromJson.getEmail());
+        if (matching_data_email.find( )) {
+            out.println("Valid Email");
+        } else {
+            out.println("Invalid Email");
+        }
+
+
+        Matcher matching_data_phone = validate_Phone.matcher(fromJson.getPhone());
+        if (matching_data_phone.find( )) {
+            out.println("Valid Phone");
+        } else {
+            out.println("Invalid Phone");
+        }
+        Matcher matching_data_birthday = validate_Birthday.matcher(fromJson.getBirthday());
+        if (matching_data_birthday.find()) {
+            out.println("Valid Birthday");
+        } else {
+            out.println("Invalid Bithday");
+        }
+
+
+
 
 
         // Print that this is a post

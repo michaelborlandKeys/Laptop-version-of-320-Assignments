@@ -27,6 +27,7 @@ function displayTableRecords() {
 
         if($("#displayUserInfo tbody tr").length = 1 && display_Json_Data.length >0){
             $("#displayUserInfo")[0].rows[1].remove();
+            // adding comment so build way change.
         };
 
 
