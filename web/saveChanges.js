@@ -117,6 +117,7 @@
             console.log("invaild input");
 
         }
+
         if(valid_form == true){
             // call new  servlet here
             <!-- AJAX Post -->

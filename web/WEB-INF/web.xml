@@ -21,6 +21,16 @@
         <servlet-name>NameListEdit</servlet-name>
         <url-pattern>/api/name_list_edit</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteNameList</servlet-name>
+        <servlet-class>edu.simpson.michael.borland.assignments.DeleteNameList</servlet-class>
+    </servlet>
+        <servlet-mapping>
+            <servlet-name>DeleteNameList</servlet-name>
+        <url-pattern>/api/delete_name_list</url-pattern>
+        </servlet-mapping>
+
+
 
 
 
