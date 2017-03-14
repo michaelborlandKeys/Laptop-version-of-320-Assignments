@@ -45,67 +45,86 @@ public class NameListEdit extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("Post");
 
-        // Grab the data we got via a parameter
-
-
-
-        java.io.BufferedReader in = request.getReader();
-        String requestString = new String();
-        for (String line; (line = in.readLine()) != null; requestString += line);
-        // Grab the data we got via a parameter
-        // programmed the old way without realizing it.
-       // Output the string we got as a request, just as a check
-
         Gson gson = new Gson();
-        Person fromJson = gson.fromJson(requestString, Person.class);
-          PersonDAO.addPeople(fromJson);
+        String requestString = new String();
+
+
+        Person fromJson = gson.fromJson(requestString, Person.class);        // Grab the data we got via a parameter
+
+
 
 log.log(Level.SEVERE, "Didn't get to printing out any data.");
 
         // Make sure our field was set.
         // out.println(" First Name: "+fromJson.getId());
 
-        out.println(" First Name: "+fromJson.getFirst());
-        out.println(" Last Name: "+fromJson.getLast());
-        out.println(" Email: "+fromJson.getEmail());
-        out.println(" Phone: "+fromJson.getPhone());
-        out.println(" Birthday: "+fromJson.getBirthday());
+
 
 
 
         // Now create matcher object.
         Matcher matching_data_first = validate_First_Name.matcher(fromJson.getFirst());
         if (matching_data_first.find( )) {
+            valid_form= true;
             out.println("Valid First Name");
         } else {
+            valid_form= false;
             out.println("Invalid First Name");
         }
         Matcher matching_data_last = validate_Last_Name.matcher(fromJson.getLast());
         if (matching_data_last.find( )) {
+            valid_form= true;
             out.println("Valid Last Name");
         } else {
+            valid_form=false;
             out.println("Invalid Last Name");
         }
 
         Matcher matching_data_email = validate_Email.matcher(fromJson.getEmail());
         if (matching_data_email.find( )) {
+            valid_form = true;
             out.println("Valid Email");
         } else {
+            valid_form= false;
             out.println("Invalid Email");
+
         }
-
-
         Matcher matching_data_phone = validate_Phone.matcher(fromJson.getPhone());
         if (matching_data_phone.find( )) {
+            valid_form= true;
             out.println("Valid Phone");
+
         } else {
+            valid_form= false;
             out.println("Invalid Phone");
+
         }
         Matcher matching_data_birthday = validate_Birthday.matcher(fromJson.getBirthday());
         if (matching_data_birthday.find()) {
             out.println("Valid Birthday");
+            valid_form= true;
         } else {
+            valid_form= false;
             out.println("Invalid Bithday");
+        }
+        if(valid_form == true)
+        {
+            java.io.BufferedReader in = request.getReader();
+
+
+            for (String line; (line = in.readLine()) != null; requestString += line);
+            // Grab the data we got via a parameter
+            // programmed the old way without realizing it.
+            // Output the string we got as a request, just as a check
+
+            out.println(" First Name: "+fromJson.getFirst());
+            out.println(" Last Name: "+fromJson.getLast());
+            out.println(" Email: "+fromJson.getEmail());
+            out.println(" Phone: "+fromJson.getPhone());
+            out.println(" Birthday: "+fromJson.getBirthday());
+
+
+            PersonDAO.addPeople(fromJson) ;
         }
 
 

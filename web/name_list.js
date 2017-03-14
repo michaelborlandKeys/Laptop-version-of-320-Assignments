@@ -36,8 +36,10 @@ function displayTableRecords() {
             var phoneNumberFormatted = display_Json_Data[i].phone.substring(0,3) + "-"
                 +display_Json_Data[i].phone.substring(3,6)+"-"+display_Json_Data[i].phone.substring(6,10);
             var fieldDataDisplay = "<tr><td>"+display_Json_Data[i].id+"</td><td>"+display_Json_Data[i].first+"</td><td>"+display_Json_Data[i].last+"</td>" +
-                "<td>"+phoneNumberFormatted+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td><td><button type='button' name='delete' class='DeleteNameList btn' value='" + display_Json_Data.id + "'>Delete</button></td></tr>";
+                "<td>"+phoneNumberFormatted+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td>" +
+                "<td><button type='button' name='delete' class='delete btn' value='" + display_Json_Data[i].id + "'>Delete</button></td></tr>";
                 $("#displayUserInfo tbody").append(fieldDataDisplay);
+
             console.log(display_Json_Data[i].id);
             console.log(display_Json_Data[i].first);
             console.log(display_Json_Data[i].last);
@@ -46,7 +48,8 @@ function displayTableRecords() {
             console.log(display_Json_Data[i].birthday);
 
         }
-
+        var buttons = $(".delete");
+        buttons.on("click", deleteItem);
     }
 );
 
@@ -97,8 +100,33 @@ function showDialogAdd() {
     $('#myModal').modal('show');
 }
 
+function deleteItem(e) {
+
+    console.debug("Delete");
+    console.debug(e.target.value);
+    var url = "api/delete_name_list";
+    var valid_id = $('#id').val();
+    var dataToServer = { id : valid_id};
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: dataToServer,
+        success: function()  {
+            $("#displayUserInfo tbody tr").empty();
+            displayTableRecords();
+        },
+        contentType: "application/json",
+        dataType: 'text' // Could be JSON or whatever too
+    });
+
+
+}
+
 var addItemButton = $('#addItem');
 addItemButton.on("click", showDialogAdd);
+
+
+
 
 
 // Call your code.

@@ -3,7 +3,7 @@
  */
 
  function savechangesBtn() {
-    var valid_id = $('#id').val();
+
     var valid_First_name = $('#firstName').val();
     var  valid_Last_name = $('#lastName').val();
     var valid_email = $('#email').val();
@@ -117,7 +117,7 @@
             console.log("invaild input");
 
         }
-
+        valid_form = true;
         if(valid_form == true){
             // call new  servlet here
             <!-- AJAX Post -->
