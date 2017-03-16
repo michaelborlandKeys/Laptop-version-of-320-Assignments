@@ -55,6 +55,31 @@ function displayTableRecords() {
 
 }
 
+function deleteItem(e) {
+
+
+    console.debug("Delete");
+    console.debug(e.target.value);
+
+
+    var url = "api/delete_name_list";
+    var valid_id = e.target.value;
+    var dataToServer = { id : valid_id};
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: dataToServer,
+        success: function()  {
+            $("#displayUserInfo tbody tr").empty();
+            displayTableRecords();
+        },
+        contentType: "application/json",
+        dataType: 'text' // Could be JSON or whatever too
+    });
+
+
+}
+
 function showDialogAdd() {
 
     // Print that we got here
@@ -100,27 +125,7 @@ function showDialogAdd() {
     $('#myModal').modal('show');
 }
 
-function deleteItem(e) {
 
-    console.debug("Delete");
-    console.debug(e.target.value);
-    var url = "api/delete_name_list";
-    var valid_id = $('#id').val();
-    var dataToServer = { id : valid_id};
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: dataToServer,
-        success: function()  {
-            $("#displayUserInfo tbody tr").empty();
-            displayTableRecords();
-        },
-        contentType: "application/json",
-        dataType: 'text' // Could be JSON or whatever too
-    });
-
-
-}
 
 var addItemButton = $('#addItem');
 addItemButton.on("click", showDialogAdd);

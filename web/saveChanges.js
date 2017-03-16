@@ -24,6 +24,7 @@
 
         if(regExpression_F_Name.test(valid_First_name))
         {
+            valid_form=true;
             $('#firstNameDiv').removeClass("has-error");
             $('#firstNameGlyph').removeClass("glyphicon-remove");
             $('#firstNameGlyph').addClass("glyphicon-ok");
@@ -33,18 +34,18 @@
         }
         else
         {
-
+            valid_form = false;
             $('#firstNameDiv').addClass("has-error");
             $('#firstNameGlyph').addClass("glyphicon-remove");
             $('#firstNameGlyph').removeClass("glyphicon-ok");
             $('#firstNameDiv').removeClass("has-success");
-            valid_form = false;
             console.log("Invalid Input");
 
 
         }
         if(regExpression_L_Name.test(valid_Last_name))
         {
+            valid_form=true;
             $('#lastNameDiv').removeClass("has-error");
             $('#lastNameGlyph').removeClass("glyphicon-remove");
             $('#lastNameGlyph').addClass("glyphicon-ok");
@@ -53,16 +54,17 @@
         }
         else
         {
+            valid_form = false;
             $('#lastNameDiv').addClass("has-error");
             $('#lastNameGlyph').addClass("glyphicon-remove");
             $('#lastNameGlyph').removeClass("glyphicon-ok");
             $('#lastNameDiv').removeClass("has-success");
-            valid_form = false;
             console.log("invaild input");
 
         }
         if(regExpression_Email.test(valid_email))
         {
+            valid_form=true;
             $('#emailDiv').removeClass("has-error");
             $('#emailGlyph').removeClass("glyphicon-remove");
             $('#emailGlyph').addClass("glyphicon-ok");
@@ -71,16 +73,17 @@
         }
         else
         {
+            valid_form = false;
             $('#emailDiv').addClass("has-error");
             $('#emailGlyph').addClass("glyphicon-remove");
             $('#emailGlyph').removeClass("glyphicon-ok");
             $('#emailDiv').removeClass("has-success");
-            valid_form = false;
             console.log("invaild input");
 
         }
         if(regExpression_Phone.test(valid_phone))
         {
+            valid_form=true;
             $('#phoneDiv').removeClass("has-error");
             $('#phoneGlyph').removeClass("glyphicon-remove");
             $('#phoneGlyph').addClass("glyphicon-ok");
@@ -89,17 +92,17 @@
         }
         else
         {
+            valid_form = false;
             $('#phoneDiv').addClass("has-error");
             $('#phoneGlyph').addClass("glyphicon-remove");
             $('#phoneGlyph').removeClass("glyphicon-ok");
             $('#phoneDiv').removeClass("has-success");
-            valid_form = false;
-
             console.log("invaild input");
 
         }
         if(regExpression_Birthday.test(valid_birthday))
         {
+            valid_form=true;
             $('#birthdayDiv').removeClass("has-error");
             $('#birthdayGlyph').removeClass("glyphicon-remove");
             $('#birthdayGlyph').addClass("glyphicon-ok");
@@ -109,15 +112,15 @@
         }
         else
         {
+            valid_form = false;
             $('#birthdayDiv').addClass("has-error");
             $('#birthdayGlyph').addClass("glyphicon-remove");
             $('#birthdayGlyph').removeClass("glyphicon-ok");
             $('#birthdayDiv').removeClass("has-success");
-            valid_form = false;
             console.log("invaild input");
 
         }
-        valid_form = true;
+
         if(valid_form == true){
             // call new  servlet here
             <!-- AJAX Post -->
@@ -142,9 +145,9 @@
             });
         }
 
-        else
+       else if (valid_form == false)
         {
-            valid_form == false;
+
             showDialogAdd();
 
             // valid form == false;
