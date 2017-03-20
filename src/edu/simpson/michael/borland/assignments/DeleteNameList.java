@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.sun.jmx.mbeanserver.Util.cast;
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by micha on 3/16/2017.
  */
@@ -34,45 +37,51 @@ public class DeleteNameList extends HttpServlet {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         out.println("Post");
-
-
-        log.log(Level.SEVERE, "Didn't get to here!.");
         Matcher matching_data_ID;
 
-
+      String requestid=(request.getParameter("id"));
 
         // Grab the data we got via a parameter
 
-
-
-        BufferedReader in = request.getReader();
-
-        int requestid = 0;
-        for (int number; (number = in.read()) != 0; requestid += number);
-        // Grab the data we got via a parameter
-        // programmed the old way without realizing it.
-        // Output the string we got as a request, just as a check
-        Gson gson = new Gson();
-        Person fromJson = gson.fromJson(Integer.toString(requestid), Person.class);
-
-
-
-        matching_data_ID = validate_ID_to_delete.matcher(Integer.toString(fromJson.getId()));
+        matching_data_ID = validate_ID_to_delete.matcher((requestid));
         out.println("is it reaching here ");
         if (matching_data_ID.find()) {
             valid_ID = true;
             out.println("is it reaching here ");
-            out.println(" ID: "+fromJson.getId());
+
             out.println("Valid delete Name");
         } else {
             valid_ID = false;
             out.println("Invalid delete person");
         }
 
-        if (valid_ID == true)
-        {
-            PersonDAO.deletePeople(fromJson);
+        if (valid_ID == true) {
+
+            PersonDAO.deletePeople(requestid);
+
         }
+
+
+
+
+
+
+
+
+
+
+        log.log(Level.SEVERE, "Didn't get to here!.");
+
+
+
+
+        // Grab the data we got via a parameter
+
+
+out.println("It reaches here ");
+
+
+
 
 
     }

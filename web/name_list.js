@@ -65,17 +65,15 @@ function deleteItem(e) {
     var url = "api/delete_name_list";
     var valid_id = e.target.value;
     var dataToServer = { id : valid_id};
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: dataToServer,
-        success: function()  {
+    console.log(dataToServer);
+
+    $.post(url, dataToServer, function (dataFromServer) {
+        console.log("Finished calling servlet.");
+        console.log(dataFromServer);
             $("#displayUserInfo tbody tr").empty();
             displayTableRecords();
-        },
-        contentType: "application/json",
-        dataType: 'text' // Could be JSON or whatever too
-    });
+
+    })
 
 
 }

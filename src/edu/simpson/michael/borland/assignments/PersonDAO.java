@@ -125,7 +125,7 @@ public class PersonDAO {
         }
         // Done! Return the results
     }
-    public static void deletePeople(Person person) {
+    public static void deletePeople(String id) {
         final Logger log = Logger.getLogger(DB_Helper.class.getName());
         log.log(Level.FINE, "Get people");
 
@@ -139,9 +139,9 @@ public class PersonDAO {
             conn = DB_Helper.getConnection();
 
             // This is a string that is our SQL query.
-     String sql = "DELETE FROM person (id) WHERE id=?";
+     String sql = "DELETE FROM person WHERE id=?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1,person.getId());
+            stmt.setString(1,id);
 
             stmt.executeUpdate();
             // If you had parameters, it would look something like
