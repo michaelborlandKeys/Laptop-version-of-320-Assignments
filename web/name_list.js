@@ -37,6 +37,7 @@ function displayTableRecords() {
                 +display_Json_Data[i].phone.substring(3,6)+"-"+display_Json_Data[i].phone.substring(6,10);
             var fieldDataDisplay = "<tr><td>"+display_Json_Data[i].id+"</td><td>"+display_Json_Data[i].first+"</td><td>"+display_Json_Data[i].last+"</td>" +
                 "<td>"+phoneNumberFormatted+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td>" +
+                "<td><button type='button' name='edit' class='edit btn' value='"+ display_Json_Data[i].id + "'>Edit</button></td>"+
                 "<td><button type='button' name='delete' class='delete btn' value='" + display_Json_Data[i].id + "'>Delete</button></td></tr>";
                 $("#displayUserInfo tbody").append(fieldDataDisplay);
 
@@ -48,14 +49,18 @@ function displayTableRecords() {
             console.log(display_Json_Data[i].birthday);
 
         }
-        var buttons = $(".delete");
-        buttons.on("click", deleteItem);
+        var delete_Record = $(".delete");
+        delete_Record.on("click", deleteUser);
+
+        var edit_Record= $(".edit");
+        edit_Record.on("click",editUser);
+
     }
 );
 
 }
 
-function deleteItem(e) {
+function deleteUser(e) {
 
 
     console.debug("Delete");
@@ -76,6 +81,51 @@ function deleteItem(e) {
     })
 
 
+}
+function editUser(e) {
+    var editing_id = e.target.parentNode.parentNode.querySelectorAll("td")[0].innerHTML;
+    var editing_First_name = e.target.parentNode.parentNode.querySelectorAll("td")[1].innerHTML;
+    var editing_Last_name = e.target.parentNode.parentNode.querySelectorAll("td")[2].innerHTML ;
+    var editing_phone= e.target.parentNode.parentNode.querySelectorAll("td")[3].innerHTML;
+    var editing_email = e.target.parentNode.parentNode.querySelectorAll("td")[4].innerHTML;
+    var editing_birthday = e.target.parentNode.parentNode.querySelectorAll("td")[5].innerHTML;
+    console.debug("Edit");
+    console.debug(e.target.value);
+
+    $('#id').val(editing_id);
+    $('#firstName').val(editing_First_name);
+    $('#lastName').val(editing_Last_name)
+    $('#email').val(editing_email);
+    $('#phone').val(editing_phone);
+    $('#birthday').val(editing_birthday);
+
+    $('#firstNameDiv').removeClass("has-error");
+    $('#firstNameGlyph').removeClass("glyphicon-remove");
+    $('#firstNameGlyph').removeClass("glyphicon-ok");
+    $('#firstNameDiv').removeClass("has-success");
+
+    $('#lastNameDiv').removeClass("has-error");
+    $('#lastNameGlyph').removeClass("glyphicon-remove");
+    $('#lastNameGlyph').removeClass("glyphicon-ok");
+    $('#lastNameDiv').removeClass("has-success");
+
+    $('#emailDiv').removeClass("has-error");
+    $('#emailGlyph').removeClass("glyphicon-remove");
+    $('#emailGlyph').removeClass("glyphicon-ok");
+    $('#emailDiv').removeClass("has-success");
+
+    $('#phoneDiv').removeClass("has-error");
+    $('#phoneGlyph').removeClass("glyphicon-remove");
+    $('#phoneGlyph').removeClass("glyphicon-ok");
+    $('#phoneDiv').removeClass("has-success");
+
+    $('#birthdayDiv').removeClass("has-error");
+    $('#birthdayGlyph').removeClass("glyphicon-remove");
+    $('#birthdayGlyph').removeClass("glyphicon-ok");
+    $('#birthdayDiv').removeClass("has-success");
+
+
+    $('#myModal').modal('show');
 }
 
 function showDialogAdd() {
@@ -99,18 +149,22 @@ function showDialogAdd() {
     $('#firstNameGlyph').removeClass("glyphicon-remove");
     $('#firstNameGlyph').removeClass("glyphicon-ok");
     $('#firstNameDiv').removeClass("has-success");
+
     $('#lastNameDiv').removeClass("has-error");
     $('#lastNameGlyph').removeClass("glyphicon-remove");
     $('#lastNameGlyph').removeClass("glyphicon-ok");
     $('#lastNameDiv').removeClass("has-success");
+
     $('#emailDiv').removeClass("has-error");
     $('#emailGlyph').removeClass("glyphicon-remove");
     $('#emailGlyph').removeClass("glyphicon-ok");
     $('#emailDiv').removeClass("has-success");
+
     $('#phoneDiv').removeClass("has-error");
     $('#phoneGlyph').removeClass("glyphicon-remove");
     $('#phoneGlyph').removeClass("glyphicon-ok");
     $('#phoneDiv').removeClass("has-success");
+
     $('#birthdayDiv').removeClass("has-error");
     $('#birthdayGlyph').removeClass("glyphicon-remove");
     $('#birthdayGlyph').removeClass("glyphicon-ok");

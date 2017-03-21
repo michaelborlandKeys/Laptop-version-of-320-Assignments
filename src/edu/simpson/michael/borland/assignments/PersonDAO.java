@@ -164,6 +164,57 @@ public class PersonDAO {
             try { conn.close(); } catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
         }
         // Done! Return the results
+
+
+
+    }
+
+    public static void editPeople(Person person) {
+        final Logger log = Logger.getLogger(DB_Helper.class.getName());
+        log.log(Level.FINE, "Get people");
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+
+        // Databases are unreliable. Use some exception handling
+        try {
+            // Get our database connection
+            conn = DB_Helper.getConnection();
+
+            // This is a string that is our SQL query.
+            String sql= " UPDATE person SET first=?,last=?,email=?,phone=?,birthday=? WHERE id=?";
+            stmt = conn.prepareStatement(sql);
+
+
+            stmt.setString(1,person.getFirst());
+            stmt.setString(2,person.getLast());
+            stmt.setString(3,person.getEmail());
+            stmt.setString(4,person.getPhone());
+            stmt.setString(5,person.getBirthday());
+            stmt.setInt(6,person.getId());
+
+            stmt.executeUpdate();
+            // If you had parameters, it would look something like
+            // String sql = "select id, first, last, phone from person where id = ?";
+
+            // Create an object with all the info about our SQL statement to run.
+
+
+
+            // Add this person to the list so we can return it. list.add(person);
+
+        } catch (SQLException se) {
+            log.log(Level.SEVERE, "SQL Error", se );
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Error", e );
+        } finally {
+            // Ok, close our result set, statement, and connection
+
+            try { stmt.close(); } catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
+            try { conn.close(); } catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
+        }
+        // Done! Return the results
     }
 
 }

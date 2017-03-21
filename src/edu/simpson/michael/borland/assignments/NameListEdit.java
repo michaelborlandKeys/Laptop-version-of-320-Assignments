@@ -54,6 +54,8 @@ public class NameListEdit extends HttpServlet {
 
              java.io.BufferedReader in = request.getReader();
                String requestString = new String();
+        String requestid=(request.getParameter("id"));
+
                for (String line; (line = in.readLine()) != null; requestString += line);
                // Grab the data we got via a parameter
                      // programmed the old way without realizing it.
@@ -68,11 +70,7 @@ public class NameListEdit extends HttpServlet {
         // Make sure our field was set.
         // out.println(" First Name: "+fromJson.getId());
 
-                out.println(" First Name: "+fromJson.getFirst());
-                out.println(" Last Name: "+fromJson.getLast());
-              out.println(" Email: "+fromJson.getEmail());
-                out.println(" Phone: "+fromJson.getPhone());
-               out.println(" Birthday: "+fromJson.getBirthday());
+
         // Grab the data we got via a parameter
         // programmed the old way without realizing it.
 
@@ -128,7 +126,9 @@ public class NameListEdit extends HttpServlet {
             valid_form = false;
             out.println("Invalid Bithday");
         }
-        if (valid_form == true) {
+
+
+        if (valid_form== true||requestid.equals("")) {
             // Output the string we got as a request, just as a chec// Gson gson = new Gson();
 
              PersonDAO.addPeople(fromJson);
@@ -136,6 +136,12 @@ public class NameListEdit extends HttpServlet {
 
             out.println("Post");
         }
+        else{
+            fromJson.setId(fromJson.getId());
+            PersonDAO.editPeople(fromJson);
+
+        }
+
     }
 
 
