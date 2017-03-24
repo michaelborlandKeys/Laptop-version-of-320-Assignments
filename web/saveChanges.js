@@ -144,7 +144,9 @@
                 console.log("Finished calling servlet.");
                 console.log(dataFromServer);
                 $("#displayUserInfo tbody tr").empty();
+                $('#myModal').modal('hide');
                 displayTableRecords();
+
             });
 
 

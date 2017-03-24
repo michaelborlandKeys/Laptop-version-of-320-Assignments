@@ -142,7 +142,7 @@ public class NameListEdit extends HttpServlet {
 
         if (valid_form) {
             Person person = new Person();
-            person.setId(Integer.parseInt(id));
+
             person.setFirst(firstName);
             person.setLast(lastName);
             person.setEmail(email);
@@ -163,7 +163,7 @@ public class NameListEdit extends HttpServlet {
                 out.println("Birthday="+" "+person.getBirthday() );
 
 
-
+                person.setId(Integer.parseInt(id));
                 PersonDAO.editPeople(person);
 
             }
