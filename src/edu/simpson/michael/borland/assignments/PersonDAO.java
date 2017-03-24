@@ -185,14 +185,15 @@ public class PersonDAO {
             // This is a string that is our SQL query.
             String sql= " UPDATE person SET first=?,last=?,email=?,phone=?,birthday=? WHERE id=?";
             stmt = conn.prepareStatement(sql);
-
+            log.log(Level.SEVERE, "Is it getting here ");
+            log.log(Level.SEVERE, person.getFirst());
 
             stmt.setString(1,person.getFirst());
             stmt.setString(2,person.getLast());
             stmt.setString(3,person.getEmail());
             stmt.setString(4,person.getPhone());
             stmt.setString(5,person.getBirthday());
-            stmt.setInt(6,person.getId());
+            stmt.setString(6,Integer.toString(person.getId()));
 
             stmt.executeUpdate();
             // If you had parameters, it would look something like

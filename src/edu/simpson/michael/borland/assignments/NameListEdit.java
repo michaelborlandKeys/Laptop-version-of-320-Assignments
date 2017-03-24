@@ -27,8 +27,8 @@ public class NameListEdit extends HttpServlet {
     private Pattern validate_Phone;
     private Pattern validate_Birthday;
     final Logger log = Logger.getLogger(NameListEdit.class.getName());
-    boolean valid_form = false;
-    private boolean test = false;
+    boolean valid_form = true;
+
 
 
     public NameListEdit() {
@@ -44,6 +44,12 @@ public class NameListEdit extends HttpServlet {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         out.println("XPost");
+        String id=request.getParameter("id");
+        String firstName= request.getParameter("firstName");
+        String lastName=request.getParameter("lastName");
+        String email=request.getParameter("email");
+        String phone= request.getParameter("phone");
+        String birthday= request.getParameter("birthday");
         Matcher matching_data_first;
         Matcher matching_data_last;
         Matcher matching_data_email;
@@ -52,16 +58,19 @@ public class NameListEdit extends HttpServlet {
 
 
 
-             java.io.BufferedReader in = request.getReader();
-               String requestString = new String();
-        String requestid=(request.getParameter("id"));
 
-               for (String line; (line = in.readLine()) != null; requestString += line);
+
+
+            // java.io.BufferedReader in = request.getReader();
+            //   String requestString = new String();
+
+
+             //  for (String line; (line = in.readLine()) != null; requestString += line);
                // Grab the data we got via a parameter
                      // programmed the old way without realizing it.
                           // Output the string we got as a request, just as a check
-              Gson gson = new Gson();
-             Person fromJson = gson.fromJson(requestString, Person.class);
+             // Gson gson = new Gson();
+            // Person fromJson = gson.fromJson(requestString, Person.class);
 
 
 
@@ -75,12 +84,12 @@ public class NameListEdit extends HttpServlet {
         // programmed the old way without realizing it.
 
 
-        log.log(Level.SEVERE, "Didn't get to printing out any data.");
+
 
         out.println("is it reaching here ");
 
 
-        matching_data_first = validate_First_Name.matcher(fromJson.getFirst());
+        matching_data_first = validate_First_Name.matcher(firstName);
         out.println("is it reaching here ");
         if (matching_data_first.find()) {
             out.println("is it reaching here ");
@@ -90,7 +99,7 @@ public class NameListEdit extends HttpServlet {
             valid_form = false;
             out.println("Invalid First Name");
         }
-        matching_data_last = validate_Last_Name.matcher(fromJson.getLast());
+        matching_data_last = validate_Last_Name.matcher(lastName);
         if (matching_data_last.find()) {
             valid_form = true;
             out.println("Valid Last Name");
@@ -99,7 +108,7 @@ public class NameListEdit extends HttpServlet {
             out.println("Invalid Last Name");
         }
 
-        matching_data_email = validate_Email.matcher(fromJson.getEmail());
+        matching_data_email = validate_Email.matcher(email);
         if (matching_data_email.find()) {
             valid_form = true;
             out.println("Valid Email");
@@ -108,7 +117,7 @@ public class NameListEdit extends HttpServlet {
             out.println("Invalid Email");
 
         }
-        matching_data_phone = validate_Phone.matcher(fromJson.getPhone());
+        matching_data_phone = validate_Phone.matcher(phone);
         if (matching_data_phone.find()) {
             valid_form = true;
             out.println("Valid Phone");
@@ -118,7 +127,7 @@ public class NameListEdit extends HttpServlet {
             out.println("Invalid Phone");
 
         }
-        matching_data_birthday = validate_Birthday.matcher(fromJson.getBirthday());
+        matching_data_birthday = validate_Birthday.matcher(birthday);
         if (matching_data_birthday.find()) {
             out.println("Valid Birthday");
             valid_form = true;
@@ -128,18 +137,36 @@ public class NameListEdit extends HttpServlet {
         }
 
 
-        if (valid_form== true||requestid.equals("")) {
+
+
+
+        if (valid_form) {
+            Person person = new Person();
+            person.setId(Integer.parseInt(id));
+            person.setFirst(firstName);
+            person.setLast(lastName);
+            person.setEmail(email);
+            person.setPhone(phone);
+            person.setBirthday(birthday);
             // Output the string we got as a request, just as a chec// Gson gson = new Gson();
+            if ( id== null|| id.equals("")) {
 
-             PersonDAO.addPeople(fromJson);
+                PersonDAO.addPeople(person);
 
 
-            out.println("Post");
-        }
-        else{
-            fromJson.setId(fromJson.getId());
-            PersonDAO.editPeople(fromJson);
+                out.println("Post");
+            } else {
+                // these are to check to see if the back end has received the information from front end to edit.
+                out.println("ID="+" "+person.getId());
+                out.println("FirstName="+" "+person.getFirst()+" "+"LastName="+person.getLast());
+                out.println("Email="+" " + person.getEmail()+" " +"Phone="+" "+person.getPhone());
+                out.println("Birthday="+" "+person.getBirthday() );
 
+
+
+                PersonDAO.editPeople(person);
+
+            }
         }
 
     }

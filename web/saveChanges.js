@@ -3,7 +3,7 @@
  */
 
  function savechangesBtn() {
-
+    var id = $('#id').val();
     var valid_First_name = $('#firstName').val();
     var  valid_Last_name = $('#lastName').val();
     var valid_email = $('#email').val();
@@ -12,7 +12,7 @@
     var valid_form = true;
 
     // regexpressions
-   // for future validation var regExpression_id = /^[0-9]{1,25}$/;
+   // var regExpression_id = /^\d{1,25}$/;
     var regExpression_F_Name = /^[A-Za-z  àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/;
     var regExpression_L_Name = /^[A-Za-z  àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$/;
     var regExpression_Email = /^([0-9a-zA-Z]+[-._+&amp;])+[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/;
@@ -21,7 +21,17 @@
 
     // Create the regular expression
 
+   /* if(regExpression_id.test(id))
+    {
+        valid_form=true;
+        console.log("vaild input");
 
+    }
+    else
+    {
+        valid_form = false;
+        console.log("incalid input");
+    }*/
         if(regExpression_F_Name.test(valid_First_name))
         {
             valid_form=true;
@@ -126,24 +136,19 @@
             <!-- AJAX Post -->
                 console.log("is form vaild")
                 var url = "api/name_list_edit";
-                var dataToServer = { first : valid_First_name,last : valid_Last_name
+                var dataToServer = {id:id, firstName : valid_First_name,lastName : valid_Last_name
                 , email: valid_email , phone: valid_phone,
                     birthday : valid_birthday
                 };
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: JSON.stringify(dataToServer),
-                success: function()  {
-                    $('#myModal').modal('hide');
-
-                    $("#displayUserInfo tbody tr").empty();
-                    displayTableRecords();
-                },
-                contentType: "application/json",
-                dataType: 'text' // Could be JSON or whatever too
+            $.post(url, dataToServer, function (dataFromServer) {
+                console.log("Finished calling servlet.");
+                console.log(dataFromServer);
+                $("#displayUserInfo tbody tr").empty();
+                displayTableRecords();
             });
-        }
+
+
+}
 
        else if (valid_form == false)
         {

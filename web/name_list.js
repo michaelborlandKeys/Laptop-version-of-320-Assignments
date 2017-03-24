@@ -72,13 +72,20 @@ function deleteUser(e) {
     var dataToServer = { id : valid_id};
     console.log(dataToServer);
 
-    $.post(url, dataToServer, function (dataFromServer) {
-        console.log("Finished calling servlet.");
-        console.log(dataFromServer);
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(dataToServer),
+        success: function(dataFromServer)   {
+            $('#myModal').modal('hide');
+            console.log(dataFromServer);
+
             $("#displayUserInfo tbody tr").empty();
             displayTableRecords();
-
-    })
+        },
+        contentType: "application/json",
+        dataType: 'text' // Could be JSON or whatever too
+    });
 
 
 }
