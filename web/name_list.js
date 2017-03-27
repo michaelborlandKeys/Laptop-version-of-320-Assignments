@@ -32,14 +32,31 @@ function displayTableRecords() {
 
 
         for (var i = 0; i < display_Json_Data.length; i++) {
+            var insertDashes;
+            var phone_number = display_Json_Data[i].phone;
 
-            var phoneNumberFormatted = display_Json_Data[i].phone.substring(0,3) + "-"
-                +display_Json_Data[i].phone.substring(3,6)+"-"+display_Json_Data[i].phone.substring(6,10);
+
+            if(phone_number.indexOf("-") > 0 )
+            {
+
+                insertDashes=phone_number;
+            }
+            else
+            {
+                insertDashes = display_Json_Data[i].phone.substring(0,3) + "-"
+                    +display_Json_Data[i].phone.substring(3,6)+"-"+display_Json_Data[i].phone.substring(6,10);
+            }
             var fieldDataDisplay = "<tr><td>"+display_Json_Data[i].id+"</td><td>"+display_Json_Data[i].first+"</td><td>"+display_Json_Data[i].last+"</td>" +
-                "<td>"+phoneNumberFormatted+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td>" +
+                "<td>"+insertDashes+"</td><td>"+display_Json_Data[i].email+"</td><td>"+display_Json_Data[i].birthday+"</td>" +
                 "<td><button type='button' name='edit' class='edit btn' value='"+ display_Json_Data[i].id + "'>Edit</button></td>"+
                 "<td><button type='button' name='delete' class='delete btn' value='" + display_Json_Data[i].id + "'>Delete</button></td></tr>";
-                $("#displayUserInfo tbody").append(fieldDataDisplay);
+
+            $("#displayUserInfo tbody").append(fieldDataDisplay);
+
+
+
+
+
 
             console.log(display_Json_Data[i].id);
             console.log(display_Json_Data[i].first);
@@ -56,7 +73,7 @@ function displayTableRecords() {
         edit_Record.on("click",editUser);
 
     }
-);
+)
 
 }
 
@@ -72,20 +89,14 @@ function deleteUser(e) {
     var dataToServer = { id : valid_id};
     console.log(dataToServer);
 
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: JSON.stringify(dataToServer),
-        success: function(dataFromServer)   {
-            $('#myModal').modal('hide');
-            console.log(dataFromServer);
+    $.post(url, dataToServer, function (dataFromServer) {
+        console.log("Finished calling servlet.");
+        console.log(dataFromServer);
+        $("#displayUserInfo tbody tr").empty();
+        displayTableRecords();
 
-            $("#displayUserInfo tbody tr").empty();
-            displayTableRecords();
-        },
-        contentType: "application/json",
-        dataType: 'text' // Could be JSON or whatever too
-    });
+    })
+
 
 
 }
