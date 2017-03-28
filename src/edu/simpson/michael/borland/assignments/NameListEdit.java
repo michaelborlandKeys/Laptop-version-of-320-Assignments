@@ -87,10 +87,10 @@ public class NameListEdit extends HttpServlet {
         if (matching_data_email.find())
         {
             out.println("Valid Email");
-        } else {
+        } else
+        {
             valid_form = false;
             out.println("Invalid Email");
-
         }
 
         matching_data_phone = validate_Phone.matcher(phone);
@@ -141,6 +141,6 @@ public class NameListEdit extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
     }
 }
