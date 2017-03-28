@@ -21,6 +21,7 @@ import java.util.List;
  */
 @WebServlet(name = "NameListEdit")
 public class NameListEdit extends HttpServlet {
+
     private Pattern validate_First_Name;
     private Pattern validate_Last_Name;
     private Pattern validate_Email;
@@ -30,10 +31,8 @@ public class NameListEdit extends HttpServlet {
    private boolean valid_form = true;
    private Person person = new Person();
 
-
-
-
-    public NameListEdit() {
+    public NameListEdit()
+    {
         validate_First_Name = Pattern.compile("^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$");
         validate_Last_Name = Pattern.compile("^[A-Za-z àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]{2,15}$");
         validate_Email = Pattern.compile("^([0-9a-zA-Z]+[-._+&amp;])+[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
@@ -58,126 +57,90 @@ public class NameListEdit extends HttpServlet {
         Matcher matching_data_phone;
         Matcher matching_data_birthday;
 
-
-
-
-
-
-            // java.io.BufferedReader in = request.getReader();
-            //   String requestString = new String();
-
-
-             //  for (String line; (line = in.readLine()) != null; requestString += line);
-               // Grab the data we got via a parameter
-                     // programmed the old way without realizing it.
-                          // Output the string we got as a request, just as a check
-             // Gson gson = new Gson();
-            // Person fromJson = gson.fromJson(requestString, Person.class);
-
-
-
         log.log(Level.SEVERE, "Didn't get to printing out any data.");
-
-        // Make sure our field was set.
-        // out.println(" First Name: "+fromJson.getId());
-
-
-        // Grab the data we got via a parameter
-        // programmed the old way without realizing it.
-
-
-
-
-
 
         valid_form=true;
         matching_data_first = validate_First_Name.matcher(firstName);
 
-        if (matching_data_first.find()) {
-
+        if (matching_data_first.find())
+        {
             out.println("Valid First Name");
-        } else {
+        } else
+        {
             valid_form = false;
             out.println("Invalid First Name");
         }
+
         matching_data_last = validate_Last_Name.matcher(lastName);
-        if (matching_data_last.find()) {
+
+        if (matching_data_last.find())
+        {
             out.println("Valid Last Name");
-        } else {
+        } else
+        {
             valid_form = false;
             out.println("Invalid Last Name");
         }
 
         matching_data_email = validate_Email.matcher(email);
-        if (matching_data_email.find()) {
 
+        if (matching_data_email.find())
+        {
             out.println("Valid Email");
         } else {
             valid_form = false;
             out.println("Invalid Email");
 
         }
+
         matching_data_phone = validate_Phone.matcher(phone);
-        if (matching_data_phone.find()) {
 
+        if (matching_data_phone.find())
+        {
             out.println("Valid Phone");
-
-        } else {
+        } else
+        {
             valid_form = false;
             out.println("Invalid Phone");
-
         }
+
         matching_data_birthday = validate_Birthday.matcher(birthday);
-        if (matching_data_birthday.find()) {
+
+        if (matching_data_birthday.find())
+        {
             out.println("Valid Birthday");
-        } else {
+        } else
+        {
             valid_form = false;
             out.println("Invalid Bithday");
         }
 
-        out.println(valid_form);
-
-        if (valid_form) {
-
-
+        if (valid_form)
+        {
             person.setFirst(firstName);
             person.setLast(lastName);
             person.setEmail(email);
             person.setPhone(phone);
             person.setBirthday(birthday);
-            // Output the string we got as a request, just as a chec// Gson gson = new Gson();
-            if ( id.equals("")) {
 
-
+            if ( id.equals(""))
+            {
                 PersonDAO.addPeople(person);
-
-
                 out.println("Post");
-            } else {
+            } else
+            {
                 // these are to check to see if the back end has received the information from front end to edit.
+                person.setId(Integer.parseInt(id));
+                PersonDAO.editPeople(person);
                 out.println("ID="+" "+person.getId());
                 out.println("FirstName="+" "+person.getFirst()+" "+"LastName="+person.getLast());
                 out.println("Email="+" " + person.getEmail()+" " +"Phone="+" "+person.getPhone());
                 out.println("Birthday="+" "+person.getBirthday() );
-
-
-                person.setId(Integer.parseInt(id));
-                PersonDAO.editPeople(person);
-
             }
         }
-
     }
 
-
-    // Print that this is a post
-
-
-
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-
+        
     }
 }

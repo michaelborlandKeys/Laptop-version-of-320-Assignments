@@ -134,7 +134,7 @@
         if(valid_form == true){
             // call new  servlet here
             <!-- AJAX Post -->
-                console.log("is form vaild")
+
                 var url = "api/name_list_edit";
                 var dataToServer = {id:id, firstName : valid_First_name,lastName : valid_Last_name
                 , email: valid_email , phone: valid_phone,
@@ -146,6 +146,7 @@
                 $("#displayUserInfo tbody tr").empty();
                 $('#myModal').modal('hide');
                 displayTableRecords();
+                console.log("edit run successfully!")
 
             });
 
