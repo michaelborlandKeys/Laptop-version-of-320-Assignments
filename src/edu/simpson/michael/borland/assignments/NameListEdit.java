@@ -27,7 +27,9 @@ public class NameListEdit extends HttpServlet {
     private Pattern validate_Phone;
     private Pattern validate_Birthday;
     final Logger log = Logger.getLogger(NameListEdit.class.getName());
-    boolean valid_form = true;
+   private boolean valid_form = true;
+   private Person person = new Person();
+
 
 
 
@@ -86,14 +88,13 @@ public class NameListEdit extends HttpServlet {
 
 
 
-        out.println("is it reaching here ");
 
 
+        valid_form=true;
         matching_data_first = validate_First_Name.matcher(firstName);
-        out.println("is it reaching here ");
+
         if (matching_data_first.find()) {
-            out.println("is it reaching here ");
-            valid_form = true;
+
             out.println("Valid First Name");
         } else {
             valid_form = false;
@@ -101,7 +102,6 @@ public class NameListEdit extends HttpServlet {
         }
         matching_data_last = validate_Last_Name.matcher(lastName);
         if (matching_data_last.find()) {
-            valid_form = true;
             out.println("Valid Last Name");
         } else {
             valid_form = false;
@@ -110,7 +110,7 @@ public class NameListEdit extends HttpServlet {
 
         matching_data_email = validate_Email.matcher(email);
         if (matching_data_email.find()) {
-            valid_form = true;
+
             out.println("Valid Email");
         } else {
             valid_form = false;
@@ -119,7 +119,7 @@ public class NameListEdit extends HttpServlet {
         }
         matching_data_phone = validate_Phone.matcher(phone);
         if (matching_data_phone.find()) {
-            valid_form = true;
+
             out.println("Valid Phone");
 
         } else {
@@ -130,18 +130,15 @@ public class NameListEdit extends HttpServlet {
         matching_data_birthday = validate_Birthday.matcher(birthday);
         if (matching_data_birthday.find()) {
             out.println("Valid Birthday");
-            valid_form = true;
         } else {
             valid_form = false;
             out.println("Invalid Bithday");
         }
 
-
-
-
+        out.println(valid_form);
 
         if (valid_form) {
-            Person person = new Person();
+
 
             person.setFirst(firstName);
             person.setLast(lastName);
@@ -149,7 +146,8 @@ public class NameListEdit extends HttpServlet {
             person.setPhone(phone);
             person.setBirthday(birthday);
             // Output the string we got as a request, just as a chec// Gson gson = new Gson();
-            if ( id== null|| id.equals("")) {
+            if ( id.equals("")) {
+
 
                 PersonDAO.addPeople(person);
 
