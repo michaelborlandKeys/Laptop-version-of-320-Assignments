@@ -35,9 +35,9 @@
                 <li><a href="javascript_assignment.html">Javascript Assignment</a></li>
                 <li><a href="test_javascript.html">Test Javascript</a></li>
                 <li><a href="name_list.html">Name List</a></li>
-                <li><a href="form_demo.html">Form Demo</a></li>
-                <li><a href="cookie_assignment.html">Cookie Demo</a></li>
-                <li><a href="session_assignment.html">Session Demo</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cookie_assignment.html">Cookie Assignment</a></li>
+
 
             </ul>
         </div>
@@ -45,32 +45,34 @@
 </nav>
 
 <div class="container">
-    <h1>Session Demo</h1>
-    <h2>Set Session</h2>
+    <h1>Cookie Demo</h1>
 
+    <h2>Set Cookie</h2>
     <div>
-        <input type="text" id="sessionKey" placeholder="Session Key">
-        <input type="text" id="sessionValue" placeholder="Session Value">
+        <input type="text" id="cookieName" placeholder="Cookie Name">
+        <input type="text" id="cookieValue" placeholder="Cookie Value">
     </div>
-    <label for="setSessionJava">Back-End Java SetSession</label>
-    <button id="setSessionJava">Go</button><br />
+    <label for="setCookieJavascript">Front-End JavaScript Set Cookie</label>
+    <button id="setCookieJavascript">Go</button><br />
 
-    <h2>Clear Session</h2>
-    <button id="invalidateSession">Invalidate Session</button>
+    <label for="setCookieJava">Back-End Java Set Cookie</label>
+    <button id="setCookieJava">Go</button><br />
 
-    <h2>Get Session</h2>
-    <label for="getSessionJava">Back-End Java GetSession</label>
-    <button id="getSessionJava">Go</button><br />
+    <h2>Get Cookies</h2>
+    <label for="getCookiesJavaScriptButton">Front-End JavaScript Get Cookie</label>
+    <button id="getCookiesJavaScriptButton">Go</button><br />
 
-    <pre id="getSessionResult">
+    <label for="getCookiesJava">Back-End Java Get Cookie</label>
+    <button id="getCookiesJava">Go</button><br />
+
+    <pre id="getCookiesResult">
     </pre>
 
-    <br />
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="js/session_assignment.js"></script>
+<script src="js/getLogin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
