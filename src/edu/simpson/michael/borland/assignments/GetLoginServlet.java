@@ -15,6 +15,8 @@ import java.util.Enumeration;
  */
 @WebServlet(name = "GetLoginServlet")
 public class GetLoginServlet extends HttpServlet {
+    private boolean logInCheck= true;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/plain");
@@ -24,30 +26,33 @@ public class GetLoginServlet extends HttpServlet {
 
         // - This example uses a session to keep count of client requests.
         HttpSession session = request.getSession();
+        String loginId = (String)session.getAttribute("loginId");
 
+            out.println("You are logged in as"+" "+loginId);
         int myCount = 0;
 
         Integer countObject = (Integer)session.getAttribute("Count");
         if(countObject != null)
             myCount = countObject.intValue();
 
-        Integer newCount = new Integer(myCount + 1);
-        session.setAttribute("Count", newCount);
+        //Integer newCount = new Integer(myCount + 1);
+        //session.setAttribute("Count", newCount);
+
 
         // - This example shows how to display the age of a session
         double ageInHours = (System.currentTimeMillis() - session.getCreationTime()) / (1000. * 60. * 60.);
         double lastAccessInHours = (System.currentTimeMillis() - session.getLastAccessedTime()) / (1000. * 60. * 60.);
 
-        out.println(String.format("Session created %.3f hours ago.", ageInHours ));
-        out.println(String.format("Last accessed   %.3f hours ago.", lastAccessInHours ));
+        //out.println(String.format("Session created %.3f hours ago.", ageInHours ));
+        //out.println(String.format("Last accessed   %.3f hours ago.", lastAccessInHours ));
 
         // - This example lists every session variable
-        out.println("Session Attributes:");
+        //out.println("Session Attributes:");
         Enumeration<String> attributes = session.getAttributeNames();
-        while(attributes.hasMoreElements()) {
-            String attribute = attributes.nextElement();
-            out.println(String.format("  %s = '%s'", attribute, session.getAttribute(attribute).toString()));
-        }
+//        while(attributes.hasMoreElements()) {
+//            String attribute = attributes.nextElement();
+//            out.println(String.format("  %s = '%s'", attribute, session.getAttribute(attribute).toString()));
+//        }
 
     }
 

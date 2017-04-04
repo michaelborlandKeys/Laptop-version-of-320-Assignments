@@ -46,5 +46,13 @@
         <url-pattern>/api/login_servlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>edu.simpson.michael.borland.assignments.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/api/logout_servlet</url-pattern>
+    </servlet-mapping>v
 
 </web-app>
